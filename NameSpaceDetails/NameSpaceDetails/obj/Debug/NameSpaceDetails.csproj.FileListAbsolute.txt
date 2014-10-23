@@ -1,0 +1,10 @@
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\NameSpaceDetails\bin\Debug\NameSpaceDetails.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\NameSpaceDetails\bin\Debug\NameSpaceDetails.exe
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\NameSpaceDetails\bin\Debug\NameSpaceDetails.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\NameSpaceDetails\obj\Debug\NameSpaceDetails.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\NameSpaceDetails\obj\Debug\NameSpaceDetails.exe
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\NameSpaceDetails\obj\Debug\NameSpaceDetails.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\NameSpaceDetails\bin\Debug\ProjectA.TeamA.dll
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\NameSpaceDetails\bin\Debug\ProjectA.TeamB.dll
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\NameSpaceDetails\bin\Debug\ProjectA.TeamA.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\NameSpaceDetails\bin\Debug\ProjectA.TeamB.pdb

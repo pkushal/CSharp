@@ -1,0 +1,480 @@
+Tutorial 1:
+
+C# is case sensitive
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HelloWorld
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Hello ");
+            Afunction();
+            
+            Console.ReadLine(); //to avoid the program to self closing
+        }
+        static void Afunction()
+        {
+            Console.WriteLine("World");
+        }
+
+    }
+}
+
+
+Tutorial 2:
+
+Reading and writing to console
+
+        Console.WriteLine("Please enter your name: ");
+        String userName= Console.ReadLine();
+        Console.WriteLine("Hello " + userName);//Concatenating the strings
+        Console.WriteLine("Hello {0}. This is using the placeholder method", userName); //Using the placeholder method
+
+to read an int value :
+
+Console.WriteLine("Please enter a number: ");
+            int num = int.Parse(Console.ReadLine());
+            Console.WriteLine("did mean :" + num);
+
+
+Tutorial 3:
+Built in types:
+
+Boolean:
+bool b=true;
+
+Intergral Data types:
+byte: 8 bits 0-255 unsigned
+sbyte: signed byte -128 to 127
+short: -32,768 to 32,767
+int: -2,147,4483,648 to 2,147,4483,647   32 bits 4 bytes
+long is 64 bit which is 8 bytes: signed
+ulong is unsigned
+
+To find the max and min values we can just do like:
+        Console.WriteLine( int.MinValue);
+        Console.WriteLine(int.MaxValue);
+
+floating:
+float: 32 bit
+double: 64 bit
+
+ string Name = "\"Kushal Pradhan is my name\"";
+ Console.WriteLine(Name);
+
+ escape character: \", \n :new line, \t tab, \\ 
+
+ Verbatim Literal:
+ It makes the code look more readable by putting the @ sign before the quotes and it will not consider the escape characters
+            String link1 = "C:\\Users\\Kushal\\Documents\\Visual Studio 2013\\Projects";
+            Console.WriteLine("line1: " + link1);
+            String link2 = @"C:\Users\Kushal\Documents\Visual Studio 2013\Projects";
+            Console.WriteLine("line2: " + link2);
+
+
+The arithmetic operators, conditional, binary etc are similar to java.
+
+
+?:    is called the ternary operator
+
+
+Nullable types in C#:
+
+In c#, the types are divided into 2 broad catrgories
+Value Type: int, float, double,structs, enums
+Reference Type: Interface, class, delegates, arrays
+
+By default the value types are not nullable and to make it nullable we use ?
+
+int i=0; here i cannot be set to null
+if i do int?i=0; then 'i' s nullable  and i=null is legal
+
+This is applicable while creating a form and user has no middle name and without the nullable thing, the user has to give some input
+bool? married=null;
+here the nullable boolean data type can store 3 different values, true, false or null
+We can also do like married.Value will give the value in the married boolean variable.
+
+Null coalescing operator:
+
+int? TicketsOnSale = null;
+    int AvailableTickets;
+    if (TicketsOnSale == null)
+    {
+        AvailableTickets = 0;
+    }
+    else
+    {
+        AvailableTickets = (int)TicketsOnSale; // need to do the casting since the TicketsOnSale is nullable type
+    }
+
+    Console.WriteLine("Availale tickets: "+AvailableTickets);
+
+    This code can be done using the null coalescing operator as
+    int AvailableTickets=TicketsOnSale ?? 0;// this mean if the AvailableTickets is null then use the default value of 0 and use the value 
+    if not null;
+
+    Datatype Conversion:
+
+    Implict Conversion is done automatically by the compiler when there will be no
+    loss of information like converting a int to float
+
+    While converting the float to int there will be loss of information and this is called explict conversion and we
+    need to do the casting
+
+    float f= 45.77F;
+    int i=(int)f; // this is called type cast
+    int j= Convert.ToInt32 (f); // this is using the convert class
+
+    String num = "100";
+    int l = int.Parse(num);
+    but this will not work if we have num="100kp"; so we can do like
+
+      String num1 = "100KP";
+                
+        int result = 0;
+        bool sucess=int.TryParse(num1, out result); // it has boolean conversion data type
+        if (sucess)
+        {
+            Console.WriteLine(result);
+        }
+        else
+        {
+            Console.WriteLine("Please enter a valid number")
+        }
+
+
+
+    difference between the type cast and the convert class: if I have a very big number in the float which the int cannot 
+    store.. then if I do the type cast will not give the error and will instead show the least number it can store while
+    the convert class will give error.
+
+    While initializing the float we need to do like:
+    float f= 1.356F; //need to suffix the number with F
+
+
+    Arrays:
+    Similar to java
+     int[] kushal=new int[3];
+     kushal[0]=1;
+      and so on.
+
+Comments:
+// single line comment
+/* */  for multiple line comment
+/// for XML documentation
+
+
+To comment do Ctrl + and K and C
+
+To comment about the class use the /// and the summary tag as shown below
+
+namespace ConsoleApplication1
+{
+    class SecondApp
+    {
+        static void Main(string[] args)
+        {
+            SampleClass
+        }
+    }
+
+}
+///<summary>
+/// This is some info about the class
+///</summary>
+public class SampleClass
+{
+
+}
+
+
+IF statements:
+Same as Java
+
+Switch statements:
+
+int i=90;
+
+switch(i)
+{
+    case 10:
+    Console.WriteLine("haha its 10");
+    break;
+
+    // since there is not code to execute  for case 20 and 30 it will fall down to case 40 do the 
+    //code in 40. This is combining the case statement
+
+    case:20
+    case:30
+    case:40
+        Console.WriteLine.("it is either 20 or 30 or 40");
+        break;
+
+    default:
+    Console.WriteLine("haha its not 10");
+    break;
+}
+
+
+Label:
+
+It is like a marker
+
+            static void Main(string[] args)
+        {
+            start:
+            Console.WriteLine("Please enter a number: ");
+            int num = int.Parse(Console.ReadLine());
+            Console.WriteLine("did mean :" + num);
+
+            switch (num)
+            {
+                case 10:
+                    Console.WriteLine("haha its 10");
+                    break;
+
+                default:
+                    Console.WriteLine("haha its not 10");
+                    break;
+             }
+            Console.WriteLine("Do you want to continue: Y or N");
+            String decision= Console.ReadLine();
+            switch(decision.ToUpper())
+            {
+                case "Y":
+                    goto start;
+    
+                default:
+                    Console.WriteLine("Bye");
+                    break;
+
+               }
+               Console.ReadLine();
+        }
+
+
+While loop:
+
+int start=0;
+while(start<=10){
+    Console.WriteLine(start);
+    start++;
+}
+
+
+do While loops:
+
+do{
+   something 
+}while(some condition is true);
+
+
+For Loop:
+
+for (int j = 0; j < 10; j++)
+            {
+                Console.WriteLine(j*2);
+            }
+
+
+For each:
+
+   int[] numbers={1,2,3};
+
+           
+            foreach(int k in numbers){
+                Console.WriteLine(k);
+            }
+
+
+break and continue:
+
+break will get out of the loop.
+continue will just skip the statements below the continue and start with the new loop cycle
+
+for(int i=0; i<20;i++){
+    if(i%2==0)
+        continue;
+
+    Console.WriteLine(i);
+}
+// this for will skip the even numbers
+
+
+Methods in C#:
+------------------------
+access_modifiers return_type method_name(Parameters if any){
+    
+}
+
+public void EvenNumbers(){
+                Console.WriteLine("this is from the method");
+                int start=0;
+                while(start<=20){
+                    Console.WriteLine(start);
+                    start += 2;
+                }
+           }
+
+and in the main method, instantiate the Class's object and invoke the method in it.
+
+
+
+Method Parameters:
+-----------------------------
+Pass by value:
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int i = 0;
+            simpleMethod(i);
+            Console.WriteLine(i);
+            Console.ReadLine();
+
+        }
+        public static void simpleMethod(int j)
+        {
+            j = 101;
+        }
+    }
+This will print out the value i =0;
+
+
+Pass by reference:
+class Program
+    {
+        static void Main(string[] args)
+        {
+            int i = 0;
+            simpleMethod(ref i);
+            Console.WriteLine(i);
+            Console.ReadLine();
+
+        }
+        public static void simpleMethod(ref int j)
+        {
+            j = 101;
+        }
+    }
+
+    This will give the value of i to be 101. This is passing by reference, pointing to the same memory location.
+    Java is always pass-by-value. To change the value or do the pass by reference kinda thing, you have to use the getter and setter.
+
+    Returning Multiple values from a method:
+    ----------------------------------------
+
+Normal thing:
+    public static int Calculate(int a, int b)
+        {
+            return a + b;
+        }
+
+Now the magic:
+
+
+  public static void Calculate(int a, int b,out int sum, out int product)
+        {
+            sum= a + b;
+            product = a * b;
+        }
+And inside the  main method we can do like:
+
+            int total=0;
+            int product=0;
+            Calculate(5, 2, out total, out product);
+            Console.WriteLine("Sum: " + total + " product: " + product);
+
+
+Param keyword:
+public static void paramMethods(params int[] a){
+            Console.WriteLine("Length of the given array is: "+a.Length);
+            foreach(int val in a){
+                Console.WriteLine(val);
+            }
+
+
+and in the main method we can do like:
+
+int[] a={1,2,4};
+paramMethods(a);
+
+With param keyword in the method signature, we can also do like paramMethods(); 
+It will not give any errror. But if there is not param keyword in the method signature
+it will give error if you call paramMethods();
+
+
+You Cannot have more than one param keyword in  the method signature and it should be the last parameter if 
+you have multiple parameters for the method.
+paramMethods(6,7,8); is also a way to give input as the array.
+
+Differece between method parameters and method arguments:
+
+int i=9;
+kushal(i);
+
+public static void kushal(int j){
+    //do something
+}
+
+Here j is called the method paramethod and  i the method argument
+
+
+Namespaces in C#:
+------------------
+
+help you organize the program.
+
+namespace ProjectA
+{
+//this namespace will have all the codes from teamA and teamB for the same project called ProjectA.
+    namespace TeamA
+    {
+    // put all the classes from team A
+        public class Kushal{
+
+        }
+    }    
+    namespace TeamB
+    {
+    // put all the classes from team B
+        public class Pradhan{
+
+        }
+    }
+}
+
+
+Say to use the class from teamA we can do like;
+ProjectA.TeamA.Kushal // this is fully qualified naming method
+or do like
+
+using ProjectA.TeamA on top and just call Kushal.somemethod();
+
+using the alias:
+using way = abc.def.gkj ;
+using path = kjk.lkjk.lkjl.kljj;
+
+then we can use the way and wala alias to call the classes and invoke on the methods as way.Kushal.print();
+
+Nesting the namespace:
+namespace A.B {} is equivalent to
+
+namespace A
+{
+    namespace B
+    {
+     // do something
+    }    
+}
+
+
+

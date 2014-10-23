@@ -1,0 +1,6 @@
+c:\users\kushal\documents\visual studio 2013\Projects\ThirdApp\ThirdApp\bin\Debug\ThirdApp.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\ThirdApp\ThirdApp\bin\Debug\ThirdApp.exe
+c:\users\kushal\documents\visual studio 2013\Projects\ThirdApp\ThirdApp\bin\Debug\ThirdApp.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\ThirdApp\ThirdApp\obj\Debug\ThirdApp.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\ThirdApp\ThirdApp\obj\Debug\ThirdApp.exe
+c:\users\kushal\documents\visual studio 2013\Projects\ThirdApp\ThirdApp\obj\Debug\ThirdApp.pdb

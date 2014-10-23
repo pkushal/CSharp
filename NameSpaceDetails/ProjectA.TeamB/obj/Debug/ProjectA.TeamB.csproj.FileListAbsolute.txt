@@ -1,0 +1,4 @@
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\ProjectA.TeamB\bin\Debug\ProjectA.TeamB.dll
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\ProjectA.TeamB\bin\Debug\ProjectA.TeamB.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\ProjectA.TeamB\obj\Debug\ProjectA.TeamB.dll
+c:\users\kushal\documents\visual studio 2013\Projects\NameSpaceDetails\ProjectA.TeamB\obj\Debug\ProjectA.TeamB.pdb
