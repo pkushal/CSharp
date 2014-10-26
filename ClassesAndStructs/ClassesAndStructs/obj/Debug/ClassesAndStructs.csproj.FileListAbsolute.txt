@@ -1,0 +1,6 @@
+c:\users\kushal\documents\visual studio 2013\Projects\ClassesAndStructs\ClassesAndStructs\bin\Debug\ClassesAndStructs.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\ClassesAndStructs\ClassesAndStructs\bin\Debug\ClassesAndStructs.exe
+c:\users\kushal\documents\visual studio 2013\Projects\ClassesAndStructs\ClassesAndStructs\bin\Debug\ClassesAndStructs.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\ClassesAndStructs\ClassesAndStructs\obj\Debug\ClassesAndStructs.exe
+c:\users\kushal\documents\visual studio 2013\Projects\ClassesAndStructs\ClassesAndStructs\obj\Debug\ClassesAndStructs.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\ClassesAndStructs\ClassesAndStructs\obj\Debug\ClassesAndStructs.csprojResolveAssemblyReference.cache

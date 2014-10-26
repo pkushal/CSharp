@@ -1,0 +1,6 @@
+c:\users\kushal\documents\visual studio 2013\Projects\Properties\Properties\bin\Debug\Properties.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\Properties\Properties\bin\Debug\Properties.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Properties\Properties\bin\Debug\Properties.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\Properties\Properties\obj\Debug\Properties.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\Properties\Properties\obj\Debug\Properties.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Properties\Properties\obj\Debug\Properties.pdb

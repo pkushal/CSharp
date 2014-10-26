@@ -478,3 +478,877 @@ namespace A
 
 
 
+
+
+Class:
+----------
+behavoiur = methods
+field = data is also referred to as state
+
+
+namespace CSharpClasses
+{
+    class Customer
+    {
+        string _firstName;
+        string _lastName;
+        
+        // Constructor
+        public Customer(string FirstName, string LastName)
+        {
+            this._firstName = FirstName; // this keyword is for better readability
+            _lastName = LastName;
+        }
+        public void PrintFullName()
+        {
+            Console.WriteLine("Full Name = {0}", _firstName + " " + _lastName);
+            Console.ReadLine();
+
+        }
+        //destructors: don't take parameters...don't need destructors..we don't have to call them..works automatically
+        ~Customer()
+        {
+            //Clean up code here
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer c1 = new Customer("Kushal", "Pradhan");
+            c1.PrintFullName();
+        }
+    }
+}
+
+
+  //this is for when we don't have the name is provided like a default consctructor
+        public Customer()
+            : this("NO first name entered ", "NO last name provided ")
+        {
+        }
+
+This is called constructor overLoading. We have more than one constructor depending upon the input type.
+
+
+
+
+Static and Instance Class members:
+------------------------------------
+there is either static or non-static(instance) for states or behaviours
+We make something static if it doesn't change with object and reamins constant
+
+Constructors can also be static and access modifier is not allowed in the static constructor.
+If we don't put the public access modifier in the normal constructor then we will not be able to use it outside the class.
+However we will not need public access modifier for the static constructors...static constructor need not be called.
+
+We need static constructor for initializing the static fields.
+
+instance members belongs to objects and static members belongs to class.
+static constructot will be called only once while instance constructors will be called every time.
+
+namespace CircleClass
+{
+    class Circle
+    {   
+        //these are states
+        static float _PI; //this is static field, we make this static because it doesn't change
+        int _Radius; // this is an instance field, since there is no static field infront of it.
+
+        //Constructor
+        public Circle(int Radius) // this will be called every time we do new.
+        {
+            this._Radius = Radius;
+        }
+        static Circle(){ //this will be called only once and are called before the instance constructors
+            Circle._PI =3.141F;
+        }
+        
+        static void Print()
+        {
+            //some codes
+        }
+        public float CalculateArea()
+        {
+            return Circle._PI * this._Radius * this._Radius;// NO this for static members, it doesn't belong to any object; it is common
+                                                            //But we can do like Circle._PI
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Circle c = new Circle(2);
+            Console.WriteLine("The area is {0}",c.CalculateArea());
+            Circle c2 = new Circle(6);
+            Console.WriteLine("The area is {0}", c2.CalculateArea());
+            //we cannot do c.Print(); 
+            //Just do like Print();
+            Console.ReadLine();
+        }
+    }
+}
+
+
+
+Inheritance:
+---------------
+helps avoid duplication. abstract away the common codes, code reuse.. less errors
+
+Inheritance, Encapsulation, Abstraction and Polymorphism.
+public class ParentClass
+{
+    // some code    
+}
+public class DerivedClass: ParentClass
+{
+    some code
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Inheritance
+{
+
+    public class Employee
+    {
+        public string FirstName;
+        public string LastName;
+        public string email;
+        public void PrintFullName()
+        {
+            Console.WriteLine(FirstName + " " + LastName + " Email: " + email);
+        }
+    }
+    public class FullTimeEmployee : Employee
+    {
+       public float YearlySalary;
+    }
+    public class PartTimeEmployee : Employee
+    {
+        public float HourlyRate;
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            FullTimeEmployee fte = new FullTimeEmployee();
+            fte.FirstName = "Kushal";
+            fte.LastName = "Pradhan";
+            fte.email = "kushal.pdn@gmail.com";
+            fte.YearlySalary=120000;
+            fte.PrintFullName();
+
+            PartTimeEmployee pte = new PartTimeEmployee();
+            pte.FirstName = "Aman";
+            pte.LastName = "Khatru";
+            pte.email = "amankhatri7@gmail.com";
+            pte.HourlyRate = 120000;
+            pte.PrintFullName();
+            Console.ReadLine();
+        }
+    }
+}
+
+
+C# supports only supports single class inheritance however multilevel inheritance is possible (B inherits from A, C inherits from B).
+C# supports multiple interface
+
+Suppose we have to constructors in the parent class and we want the base class to inherit from the specific constructor then we can do like:
+
+public class ParentClass
+{
+    //this is the default constructor
+    public ParentClass()
+    {
+    Console.WriteLine("Parent constructor called");
+    }
+
+    //second constructor
+    public ParentClass(string msg)
+    {
+        Console.WriteLine(msg);
+    }
+}
+
+public class ChildClass: ParentClass
+{
+    public ChildClass(): base("Message class controlling the parent class")
+    {
+        Console.WriteLine("Child class Constructor called");
+    }
+}
+
+
+
+Method Hiding:
+----------------
+Instead of super we have base here.
+If we override the method from the base class in the child class then it will hide the base class method and run the method on child class.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MethodHiding
+{
+
+    public class Employee
+    {
+        public string FirstName;
+        public string LastName;
+        public string email;
+        public void PrintFullName()
+        {
+            Console.WriteLine("This is from base class "+FirstName + " " + LastName + " Email: " + email);
+        }
+    }
+    public class FullTimeEmployee : Employee
+    {
+        public float YearlySalary;
+        public new void PrintFullName() // we put a new  in the method to tell that we want to hide this method in parent class
+        {
+            Console.WriteLine("This is from the derived class: " + FirstName + " " + LastName + " Email: " + email);
+        }
+    }
+    public class PartTimeEmployee : Employee
+    {
+        public float HourlyRate;
+        public new void PrintFullName()
+        {
+            base.PrintFullName();
+            //Console.WriteLine("This is from the derived class: "+FirstName + " " + LastName + " Email: " + email);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            FullTimeEmployee fte = new FullTimeEmployee();
+            fte.FirstName = "Kushal";
+            fte.LastName = "Pradhan";
+            fte.email = "kushal.pdn@gmail.com";
+            fte.YearlySalary = 120000;
+            fte.PrintFullName();
+            ((Employee)fte).PrintFullName(); // fte is casted into employee and then printFullName is invoked in employee type
+
+            PartTimeEmployee pte = new PartTimeEmployee();
+            pte.FirstName = "Aman";
+            pte.LastName = "Khatru";
+            pte.email = "amankhatri7@gmail.com";
+            pte.HourlyRate = 120000;
+            pte.PrintFullName();
+
+
+            Employee kpp = new FullTimeEmployee();
+            kpp.FirstName = "KPP";
+            kpp.LastName = "Pdn";
+            kpp.email = "kushal@gmail.com";
+            kpp.PrintFullName();
+
+            Console.ReadLine();
+        }
+    }
+}
+
+
+
+
+
+Polymorphism:
+---------------
+
+
+To override the method in the child class, we need to use the virtual keyword in the method in the base class and in the child class
+we neeed to use the override method in the method in the child class
+
+
+namespace Polymorphism
+{
+    public class Employee{
+        public string FirstName="FN";
+        public string LastName = "LN";
+        public virtual void PrintFullName() // virtual indicates that the derived class can override this method
+        {
+            Console.WriteLine(FirstName + " " + LastName);
+        }
+
+    }
+    public class FullTimeEmployee : Employee
+    {
+        public override void PrintFullName()
+        {
+            Console.WriteLine(FirstName + " " + LastName +" Full time");
+        }
+    }
+    public class PartTimeEmployee : Employee
+    {
+        public override void PrintFullName()
+        {
+            Console.WriteLine(FirstName + " " + LastName + " Part time");
+        }
+    }
+    public class TemporaryEmployee : Employee
+    {
+        // If we don't have the PringFullName() here then it will use the base class PrintFullName method.
+        public override void PrintFullName()
+        {
+            Console.WriteLine(FirstName + " " + LastName + " Temp time");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee[] employees = new Employee[4];
+            employees[0] = new Employee();
+            employees[1] = new PartTimeEmployee();
+            employees[2] = new FullTimeEmployee();
+            employees[3] = new TemporaryEmployee();
+
+            foreach (Employee e in employees)
+            {
+                e.PrintFullName();
+            }
+            Console.ReadLine();
+        }
+    }
+}
+
+
+Polymorphism allows you to invoke the derived class method using the base class reference variable at run time. 
+
+
+
+Method Overriding  Vs. Method Hiding:
+------------------------------------------
+
+In method overriding a base class reference variable pointing to a child class object, will invoke the overridden  method in the child class.
+In method hiding, a base class reference variable pointing to a child class object, will invoke the hidden method in the base class.
+
+Overriding:
+-------------
+
+ public class BaseClass
+    {
+        public virtual void Print()
+        {
+            Console.WriteLine("I am a base Class Print Method");
+        }
+    }
+    public class DerivedClass : BaseClass
+    {
+        public override void Print()
+        {
+            Console.WriteLine("I am a Derived Class Print Method");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            BaseClass b = new DerivedClass();
+            b.Print(); // this will print (I am a Derived Class Print Method)
+            DerivedClass d = new DerivedClass();
+            d.Print(); // this will print (I am a Derived Class Print Method)
+            Console.ReadLine();
+        }
+    }
+
+Method hiding:
+------------------
+
+ public class BaseClass
+    {
+        public virtual void Print()
+        {
+            Console.WriteLine("I am a base Class Print Method");
+        }
+    }
+    public class DerivedClass : BaseClass
+    {
+        public new void Print()
+        {
+            Console.WriteLine("I am a Derived Class Print Method");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            BaseClass b = new DerivedClass();
+            b.Print();  // this will print (I am a Base Class Print Method)
+            DerivedClass d = new DerivedClass();
+            d.Print();  // this will print (I am a Derived Class Print Method)
+            Console.ReadLine();
+        }
+    }
+
+
+    Method Overloading:
+    ------------------------
+
+    Function overloading is interchangably used with method overloading.
+    It allows a class to have multiple method with the same name, but with different signature. SO it can be done based on 
+    the number, type(int, float) or kind(value, Ref, Out) of parameters.
+    However it is not possible to overload a method just using the return type and params modifier.
+
+
+namespace MethodOverLoading
+{
+    class Program
+    {
+        public static void Add(int FN, int SN)
+        {
+            Console.WriteLine("Sum = {0}", FN + SN);
+        }
+        public static void Add(float FN, float SN)
+        {
+            Console.WriteLine("Sum = {0}", FN + SN);
+        }
+        public static void Add(int FN, float SN)
+        {
+            Console.WriteLine("Sum = {0}", FN + SN);
+        }
+        public static void Add(int FN, int SN, int TN)
+        {
+            Console.WriteLine("Sum ={0}", FN + SN);
+        }
+        public static void Add(int FN, int SN, out int Sum)
+        {
+            Console.WriteLine("Sum ={0}", FN + SN);
+            Sum = FN + SN;
+        }
+        static void Main(string[] args)
+        {
+            Add(1, 2);
+            Console.ReadLine();
+        }
+    }
+}
+
+
+Properties:
+-------------
+
+
+Marking the field public is a bad idea. It can be easily changed..do not expose the fields as public...make them private
+By convention , we declare the names of the private fields using the underscore as private int _id;
+We need to use the getter and setters to encapsulate  and protect fields. But in c# we can use the properties instead of 
+using the getter and setters.
+
+Usual way:
+-----------
+
+namespace Properties
+{
+    public class Student
+    {
+        private int _Id;
+        private string _name;
+        private int _passmark = 35;
+
+        public void setId(int id)
+        {
+            this._Id = id;
+        }
+      
+        public void setName(string name)
+        {
+          
+            this._name = name;
+          
+        }
+        public void setPassMark(int passmark)
+        {
+            this._passmark = passmark;
+        }
+        public void print()
+        {
+            Console.WriteLine("ID: {0} and Name: {1} and Passmark: {2}", this._Id,this._name,this._passmark);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Student s = new Student();
+            s.setId(7787);
+            s.setName("Kushal");
+            s.setPassMark(40);
+            s.print();
+          
+            
+            Console.ReadLine();
+        }
+    }
+}
+
+
+The advantage of properties over traditional getter and setter is that you can access them as if they were public fields.
+
+
+namespace Properties
+{
+    public class Student
+    {
+        private int _Id;
+        private string _name;
+        private int _passmark = 35;
+
+        public int Id
+        { // it will have no parameters but will have set and get accessor
+            set{
+                if (value <= 0)
+                {
+                    throw new Exception("Student Id cannot be negative");
+                }
+                this._Id = value;
+            }
+            get{
+                return this._Id;
+            }
+            
+        }
+
+        public string Name
+        { // it will have no parameters but will have set and get accessor
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Student name cannot be negative");
+                }
+                this._name = value;
+            }
+            get
+            {
+                return string.IsNullOrEmpty(this._name)?"No Name":this._name;
+            }
+
+        }
+        public int Passmark
+        { // it will have no parameters but will have set and get accessor
+           
+            get
+            {
+                return this._passmark;
+            }
+
+        }
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Student s = new Student();
+            s.Id = 101;
+            s.Name = "kushal Properties";
+          
+            Console.WriteLine(s.Id + "  "+ s.Name+" "+s.Passmark);
+            
+            Console.ReadLine();
+        }
+    }
+}
+
+
+Auto Implemented Properties:
+----------------------------
+For field that have no logic like city or email we can just use the autoimplemented properties. We also donot need to declare the 
+private instance variable.
+ Just do as  public string Email {set;get;}...the complier will do every thing.
+
+
+namespace Properties
+{
+    public class Student
+    {
+        private int _Id;
+        private string _name;
+        private int _passmark = 35;
+        
+
+        public int Id
+        { // it will have no parameters but will have set and get accessor
+            set{
+                if (value <= 0)
+                {
+                    throw new Exception("Student Id cannot be negative");
+                }
+                this._Id = value;
+            }
+            get{
+                return this._Id;
+            }
+            
+        }
+
+        public string Name
+        { // it will have no parameters but will have set and get accessor
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Student name cannot be negative");
+                }
+                this._name = value;
+            }
+            get
+            {
+                return string.IsNullOrEmpty(this._name)?"No Name":this._name;
+            }
+
+        }
+        public int Passmark
+        { // it will have no parameters but will have set and get accessor
+           
+            get
+            {
+                return this._passmark;
+            }
+
+        }
+        public string City
+        {
+            set;
+            get;
+        }
+        public string Email {set;get;}
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Student s = new Student();
+            s.Id = 101;
+            s.Name = "kushal Properties";
+            s.Email="kushal.pdn@gmail.com";
+            s.City = "Tansen";
+            Console.WriteLine(s.Id + "  "+ s.Name+" "+s.Passmark+ " "+s.Email + " " +s.City);
+            
+            Console.ReadLine();
+        }
+    }
+}
+
+
+
+
+
+
+Structs:
+----------
+Structs can have:
+    1. Private fields
+    2. public properties
+    3. constructors
+    4. method
+ just like a class
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Structs
+{
+    //here everything is same as in the class..only difference is we have used struct instead of class.
+    public struct Customer
+    {
+        private int _id;
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        public int ID
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+        public Customer(int id, string name)
+        {
+            this._id = id;
+            this._name = name;
+        }
+        public void PrintDetails()
+        {
+            Console.WriteLine("Id: {0} and Name: {1}", this._id, this._name);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer c1 = new Customer(101,"Mark");
+            c1.PrintDetails();
+
+            Customer c2 = new Customer();
+            c2.ID = 102;
+            c2.Name = "Jake";
+            c2.PrintDetails();
+            Console.ReadLine();
+
+            //this is object initializer syntax (introduced in C# 3.0)...we can use this to intitialize classes as well
+            Customer c3 = new Customer
+            {
+                ID=103,
+                Name="Aman"
+            };
+            c3.PrintDetails();
+
+        }
+    }
+}
+
+
+
+DIFFERENCE BETWEEN CLASS AND STRUCT:
+-------------------------------------
+
+Struct is a value type while class is reference type.
+structs are stored in stack while class are stored in heap
+
+Value type hold their value in memory where they are declared, but reference types hold a reference to an object in memory.
+
+Value types are destroyed immediately after the scope is lost while for the reference types only the reference variable is destroyed
+after the scope is lost. Object is destroyed later by the garbage collector.
+
+When you copy one struct into another struct, a new copy of that struct is created and modification on one struct will not affect the
+values contained in other struct.
+On the other hand if we copy a class to another class, we only get copy of the reference variable and both the reference variable point to 
+the same object on heap. So any operation on one will affect the values contained by the other reference variable.
+
+structs cannot have destructor while class can have destructor
+
+Class:
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+    public class Customer
+    {
+        private int _id;
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        public int ID
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+  
+      
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            
+                Customer c1 = new Customer(); 
+                c1.ID = 898;
+                c1.Name = "Mark";
+             
+
+                Customer c2 = c1;
+                c2.Name = "wala";
+                Console.WriteLine("C1.Name: {0} and C2.Name: {1}", c1.Name, c2.Name);
+                // this will refer to the same object and change in name will affect both c1 and c2
+          }
+            int k = i;
+        Console.ReadLine();
+
+        }
+    }
+
+
+On the other hand:
+
+    public struct Customer
+    {
+        private int _id;
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        public int ID
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+  
+      
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            
+                Customer c1 = new Customer(); 
+                c1.ID = 898;
+                c1.Name = "Mark";
+             
+
+                Customer c2 = c1;
+                c2.Name = "wala";
+                Console.WriteLine("C1.Name: {0} and C2.Name: {1}", c1.Name, c2.Name);
+                // this will refer to the different object and change in name will NOT affect both c1 and c2
+          }
+            int k = i;
+         Console.ReadLine();
+
+        }
+    }
+}
+
+Structs cannot have explicit parameter less constructor where as class can.
+this means:
+in struct:
+
+
+public struct Customer{
+    public Customer(){} is not allowed while this is allowed in class
+}
+Struct cannot ih=nherit from another class where as class can can. Both class and structs can inherit from interface.
+int, double are examples of structs in .NET framework. Struct are sealed types.
+
+when we seal a class we cannot inherit from that.
+
+public sealed class Customer{
+    // some code
+}
+public class Derived : Customer is not allowed
+
+
+
+Inheritance:
+-------------
+
+

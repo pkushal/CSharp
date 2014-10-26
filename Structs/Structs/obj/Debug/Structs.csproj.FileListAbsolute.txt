@@ -1,0 +1,5 @@
+c:\users\kushal\documents\visual studio 2013\Projects\Structs\Structs\bin\Debug\Structs.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\Structs\Structs\bin\Debug\Structs.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Structs\Structs\bin\Debug\Structs.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\Structs\Structs\obj\Debug\Structs.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Structs\Structs\obj\Debug\Structs.pdb
