@@ -1348,7 +1348,427 @@ public class Derived : Customer is not allowed
 
 
 
-Inheritance:
--------------
+Interface:
+----------
 
+keyword is interface. Just like classes interface also contains properties, methods, delegates or events but only declaration 
+and no implementation.
+They are public by default and they won't allow explicit modifiers.(Don't even put public keyword, they are public by default).
+ A class  can inherit from multiple interface but not more than one class at a time. They cannot also contain field.
+Interface can inherit from other interface.
+We cannot insantiate from an interface but an interface reference variable can point to a derived class object.
+
+We generally put I infront of a interface name as ICustomer.
+When we implement the interface we need to put the access modifier as public.
+
+Parent class reference variable can point to a child class object.
+
+
+Explicit Interface Inplementation:
+------------------------------------
+Don't use the access modifiers in the explicit Inteface implementation. When two or more interface has same method signature
+there will be confusion, this is the case of explicit interface implementation. and in this case we should not use the access modifier
+in the interface implementation.
+
+namespace ExplicitInterfaceImplementation
+{
+    interface I1
+    {
+        void Method1();
+     }
+    interface I2
+    {
+        void Method1();
+    }
+    class Program :I1,I2
+    {
+        void I1.Method1() // no access modifier
+        {
+            Console.WriteLine("I1 interface method");
+        }
+
+        void I2.Method1() // no access modifier
+        {
+            Console.WriteLine("I2 interface method");
+        }
+        static void Main(string[] args)
+        {
+            Program P = new Program();
+            //P.Method1(); There is an ambuiguity it is invoking the I1 or I2's method
+            ((I1)P).Method1(); // type casting is necessary
+            ((I2)P).Method1();
+            Console.ReadLine();
+        }
+    }
+}
+
+
+We can also set one interface default and other not default as:
+
+
+namespace ExplicitInterfaceImplementation
+{
+
+
+    interface Inter
+    {
+        void Method2();
+    }
+    interface face
+    {
+        void Method2();
+    }
+    class Program :Inter,face
+    {
+        public void Method2()
+        {
+            Console.WriteLine("Default inteface method 2");
+        }
+        void face.Method2()
+        {
+            Console.WriteLine("Not so Default inteface method 2");
+        }
+
+        static void Main(string[] args)
+        {
+            Program P = new Program();
+            P.Method2();
+            ((face)P).Method2();
+
+            Console.ReadLine();
+        }
+    }
+}
+
+
+
+Abstract Class in C#:
+------------------------
+
+Keyword: abstract
+They are incomplete classes.Abstract methods will not have any implementation, just a signature as interface.
+They cannot be instantiated. The class derived from the abstract classes has to be implemented by the child class.
+Abstract classes are only used as a base classes.
+
+If class inherits from the abstract from the abstract class, it has two options to implement the abstract method.
+    1. provide implementation for all the abstract members inherited from the base abstract.
+    2. If you do not wish to implement the abstract the methods, then the class has to be marked as abstract.
+
+
+Abstract class cannot be sealed...sealed keyword to prevent inheriting...they contradit each other.
+Absstract class may contain abstract method and fields, but not mandatory
+
+
+Abstract Classes vs Interfaces:
+-------------------------------
+
+Abstract classes can have implementation of some of the members but none for interface.
+Abstract classes can have fields but no for interface
+Interface can inherit from another interface but not from abstract class while abstract can inherit from another
+abstract class or interface.
+A class can inherit from multiple interface at the same time while as class cannot from the multiple classes at the same time
+Abstract class members can hava access modifier where as interface members (methods) cannot have access modifiers.
+
+
+Problems with multiple Class inheritance:
+------------------------------------------
+Diamond problem.
+
+Scenario:
+There is a Base class A
+B and C inherits from A
+D inherits from B and C
+
+                    A
+            B               C
+                    D
+
+            then d will not know which method to implement, B's or D's
+
+Gist : do not implement from the multiple class and it will also not allow that.
+
+
+MultipleClass iheritance using the interfaces:
+------------------------------------------------
+
+Simple cha.. just do it.
+
+
+
+Delegates in C#:
+----------------
+It is a type safe (signature should match) funtion pointer. It points to a function and when you call a the delgate, it invokes the function
+Keyword: delegate
+Syntax just like function....just like a method signature
+
+
+using System;
+using System.Collections.Generic;
+
+namespace DelegatesInCSharp
+{
+
+    public delegate void HelloFunctionDelegate(string str);
+
+    //this points to any method which has a void return type and take a string input
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            HelloFunctionDelegate del = new HelloFunctionDelegate(Hello); // we are passing in the name of the function pointer
+            del("hello from delegate");
+            Console.ReadLine();
+        }
+
+        public static void Hello(string str)
+        {
+            Console.WriteLine(str);
+        }
+
+     }
+}
+
+Why?
+Delegates are similar to class, we can create an instance of it and when you do do, pass in the function name as a parameter to the 
+delegate constructor and it is to this function the delegate will point to.
+
+
+Delegate usage in C#:
+--------------------
+
+
+using System;
+using System.Collections.Generic;
+
+
+namespace DelegateUsage
+{
+    class Employee
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int Salary { get; set; }
+        public int Experience { get; set;}
+
+        public static void PromoteEmployee(List<Employee> employeeList)
+        {
+            foreach(Employee employee in employeeList){
+                if(employee.Experience>=5){
+                    Console.WriteLine(employee.Name+ " Promoted");
+                }
+            }
+            
+        }
+        
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Employee> empList = new List<Employee>();
+            empList.Add(new Employee(){ID=101,Name="Mary",Salary=5000,Experience=4});
+            empList.Add(new Employee(){ID=102,Name="Jane",Salary=3000,Experience=5});
+            empList.Add(new Employee(){ID=103,Name="Rob",Salary=5000,Experience=6});
+            empList.Add(new Employee(){ID=104,Name="Percival",Salary=5000,Experience=2});
+            empList.Add(new Employee(){ID=105,Name="Jon",Salary=7000,Experience=3});
+            empList.Add(new Employee(){ID=106,Name="Dave",Salary=53000,Experience=7});
+            empList.Add(new Employee(){ID=107,Name="Chris",Salary=5000,Experience=4});
+            Employee.PromoteEmployee(empList);
+            Console.ReadLine();
+
+        }
+    }
+}
+Problem with this code is it is hard coded, not flexible....with delegate we will make it flexible.
+
+
+using System;
+using System.Collections.Generic;
+
+
+namespace DelegateUsage
+{
+    delegate bool IsPromotable(Employee empl);
+    class Employee
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int Salary { get; set; }
+        public int Experience { get; set;}
+
+        public static void PromoteEmployee(List<Employee> employeeList, IsPromotable IsEligibleToPromote)
+        {
+            foreach(Employee employee in employeeList){
+                if(IsEligibleToPromote(employee)){
+                    Console.WriteLine(employee.Name+ " Promoted");
+                }
+            }
+            
+        }
+             
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Employee> empList = new List<Employee>();
+            empList.Add(new Employee(){ID=101,Name="Mary",Salary=5000,Experience=4});
+            empList.Add(new Employee(){ID=102,Name="Jane",Salary=3000,Experience=5});
+            empList.Add(new Employee(){ID=103,Name="Rob",Salary=5000,Experience=6});
+            empList.Add(new Employee(){ID=104,Name="Percival",Salary=5000,Experience=2});
+            empList.Add(new Employee(){ID=105,Name="Jon",Salary=7000,Experience=3});
+            empList.Add(new Employee(){ID=106,Name="Dave",Salary=53000,Experience=7});
+            empList.Add(new Employee(){ID=107,Name="Chris",Salary=5000,Experience=4});
+            IsPromotable promotable = new IsPromotable(Promote);
+                
+            Employee.PromoteEmployee(empList,promotable);
+            Console.ReadLine();
+
+        }
+ public static bool Promote(Employee emp)
+        {
+            if (emp.Experience >= 5)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+    }
+}
+
+
+MultiCast Delegates:
+----------------------
+
+It is a delegate that has reference to more than one function. When you invoke the multicast delegate, all the functions the delegate
+is pointing, are invoked.
+2 approches:
+    + or += to register a method with the delegate
+    - or -= to unregister a method with the delegate
+
+It invokes in the same order  in which they are added.
+Multicast delegate are used in the  implementation of the observer design pattern and it is also called as publish/subsribe pattern.
+
+If the delegate has a return type other than void and if the delegate is a multicast delegate, only the value of the last invoked method
+will be returned. Along the same lines, if he delegate has an out parameter, the value of the output parameter, will be the value assigned by the last
+method.
+
+namespace MultiCastDelegates
+{
+    public delegate void SampleDelegate();
+    class Program
+    {
+        public static void SampleMethod1()
+        {
+            Console.WriteLine("Sample method 1 Invoked");
+        }
+        public static void SampleMethod2()
+        {
+            Console.WriteLine("Sample method 2 Invoked");
+        }
+        public static void SampleMethod3()
+        {
+            Console.WriteLine("Sample method 3 Invoked");
+        }
+     
+        static void Main(string[] args)
+        {
+            SampleDelegate del1, del2, del3, del4;
+            del1 = new SampleDelegate(SampleMethod1);
+            del2 = new SampleDelegate(SampleMethod2);
+            del3 = new SampleDelegate(SampleMethod3);
+     //     del4 = del1 + del2 + del3; //del4 is pointing to all sampleMethod1, sampleMethod2, sampleMethod3
+            del4 = del1 + del2 + del3-del2;  // this will add the del2 and then removes the del2 again.
+            del4();
+            
+            
+            // Other way to use the multicast the delegate
+            SampleDelegate del = new SampleDelegate(SampleMethod1);
+            del += SampleMethod2;
+            del += SampleMethod3;
+            //del -= SampleMethod1;
+            del();
+
+
+            Console.ReadLine();
+        }
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MultiCastDelegates
+{
+    public delegate int SampleDelegate();
+    class Program
+    {
+        public static void SampleMethod1()
+        {
+            
+            Console.WriteLine("Sample method 1 Invoked");
+            return 1;
+            
+        }
+        public static int SampleMethod2()
+        {
+            Console.WriteLine("Sample method 2 Invoked");
+            return 2;
+        }
+      
+        static void Main(string[] args)
+        {
+
+            SampleDelegate del = new SampleDelegate(SampleMethod1);
+            del += SampleMethod2;
+            int  DelegateReturnedValue = del(); // it hold the value from the last invokation list
+            Console.WriteLine(DelegateReturnedValue);
+
+
+            Console.ReadLine();
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MultiCastDelegates
+{
+    public delegate void SampleDelegate(out int Integer);
+    class Program
+    {
+        public static void SampleMethod1(out int num)
+        {
+            num = 1;
+            Console.WriteLine("Sample method 1 Invoked");
+            
+        }
+        public static void SampleMethod2(out int num)
+        {
+            num = 2;
+            Console.WriteLine("Sample method 2 Invoked");
+            
+        }
+      
+        static void Main(string[] args)
+        {
+
+            SampleDelegate del = new SampleDelegate(SampleMethod1);
+            del += SampleMethod2;
+            int  DelegateOutparameterValue = -1;
+            del(out DelegateOutparameterValue);
+            Console.WriteLine(DelegateOutparameterValue);
+            Console.ReadLine();
+        }
+    }
+}
 

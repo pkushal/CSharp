@@ -1,0 +1,6 @@
+c:\users\kushal\documents\visual studio 2013\Projects\DelegatesInCSharp\DelegatesInCSharp\bin\Debug\DelegatesInCSharp.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\DelegatesInCSharp\DelegatesInCSharp\bin\Debug\DelegatesInCSharp.exe
+c:\users\kushal\documents\visual studio 2013\Projects\DelegatesInCSharp\DelegatesInCSharp\bin\Debug\DelegatesInCSharp.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\DelegatesInCSharp\DelegatesInCSharp\obj\Debug\DelegatesInCSharp.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\DelegatesInCSharp\DelegatesInCSharp\obj\Debug\DelegatesInCSharp.exe
+c:\users\kushal\documents\visual studio 2013\Projects\DelegatesInCSharp\DelegatesInCSharp\obj\Debug\DelegatesInCSharp.pdb
