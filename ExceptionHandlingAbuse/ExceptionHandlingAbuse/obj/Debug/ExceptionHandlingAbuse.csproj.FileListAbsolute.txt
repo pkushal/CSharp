@@ -1,0 +1,6 @@
+c:\users\kushal\documents\visual studio 2013\Projects\ExceptionHandlingAbuse\ExceptionHandlingAbuse\bin\Debug\ExceptionHandlingAbuse.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\ExceptionHandlingAbuse\ExceptionHandlingAbuse\bin\Debug\ExceptionHandlingAbuse.exe
+c:\users\kushal\documents\visual studio 2013\Projects\ExceptionHandlingAbuse\ExceptionHandlingAbuse\bin\Debug\ExceptionHandlingAbuse.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\ExceptionHandlingAbuse\ExceptionHandlingAbuse\obj\Debug\ExceptionHandlingAbuse.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\ExceptionHandlingAbuse\ExceptionHandlingAbuse\obj\Debug\ExceptionHandlingAbuse.exe
+c:\users\kushal\documents\visual studio 2013\Projects\ExceptionHandlingAbuse\ExceptionHandlingAbuse\obj\Debug\ExceptionHandlingAbuse.pdb

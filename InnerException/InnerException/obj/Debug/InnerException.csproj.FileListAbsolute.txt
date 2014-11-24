@@ -1,0 +1,5 @@
+c:\users\kushal\documents\visual studio 2013\Projects\InnerException\InnerException\bin\Debug\InnerException.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\InnerException\InnerException\bin\Debug\InnerException.exe
+c:\users\kushal\documents\visual studio 2013\Projects\InnerException\InnerException\bin\Debug\InnerException.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\InnerException\InnerException\obj\Debug\InnerException.exe
+c:\users\kushal\documents\visual studio 2013\Projects\InnerException\InnerException\obj\Debug\InnerException.pdb

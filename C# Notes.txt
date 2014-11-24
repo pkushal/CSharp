@@ -1772,3 +1772,698 @@ namespace MultiCastDelegates
     }
 }
 
+
+
+
+
+Handling Exception:
+-------------------
+
+An exception is actually a class that derives from  System.Exception class. Exception is an unforseen error that occurs when a program is running.
+
+Message: gets a message that describes the current exception.
+stack Trace: Provides the call stack to the line number in the method where the exception.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;  // Need to add this
+
+namespace HandlingExceptions
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StreamReader streamReader = new StreamReader(@"C:\Users\Kushal\Documents\Visual Studio 2013\Projects\README.txt");  // @ is the verbatim
+            Console.WriteLine(streamReader.ReadToEnd());
+            streamReader.Close();
+            Console.ReadLine();
+        }
+    }
+}
+
+
+With exception handling we have:
+
+namespace HandlingExceptions
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                StreamReader streamReader = new StreamReader(@"C:\Users\Kushal\Documents\Visual Studio 2013\Projects\README1.txt");
+                Console.WriteLine(streamReader.ReadToEnd());
+                streamReader.Close();
+                Console.ReadLine();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+                Console.ReadLine();
+            }
+        }
+    }
+}
+
+
+
+Total code:
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace HandlingExceptions
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StreamReader streamReader = null;
+            try
+            {
+                streamReader = new StreamReader(@"C:\Users\Kushal\Documents\Visual Studio 2013\Projects\README1.txt");
+                Console.WriteLine(streamReader.ReadToEnd());
+              }
+            catch(Exception e)
+            {
+                Console.WriteLine("Please check if the file exists");
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+              
+            }
+            finally
+            {
+                if (streamReader != null)
+                {
+                    Console.WriteLine("Finally Block....streamReader was NOT null");
+                    streamReader.Close();
+                }
+             }
+
+            Console.WriteLine("Out of exception handling");
+            Console.ReadLine();
+        }
+    }
+}
+
+
+
+Inner Exceptions:
+------------------
+
+The InnerException property returns the exception instance that caused the current exception.
+ To Return the original exception pass it as a parameter to the constructor , of current exception.
+ Always check if inner exception is not null before accessing any property of the inner
+ exception object, else , you mayu get null reference exceptio. 
+ To get the type of inner exception use getType() method
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace InnerException
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+
+            Console.WriteLine("Enter the first Number: ");
+            int FN=Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter the Second Number: ");
+            int SN = Convert.ToInt32(Console.ReadLine());
+
+            int result = FN /SN;
+            Console.WriteLine("Result ={0}", result);
+            }
+            catch (Exception e)
+            {
+                string filepath=@"C:\Users\Kushal\Documents\Visual Studio 2013\Projects\log.txt";
+                StreamWriter sw= new StreamWriter(filepath);
+                sw.Write(e.GetType().Name);
+                sw.Close();
+                Console.WriteLine("There is a problem. Try again.");
+            }
+            Console.ReadLine();
+
+        }
+    }
+}
+
+Here it will write the error in the filepath.
+
+
+Complete Code demonstrating the Inner Exceptions:
+-------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+/*The InnerException property returns the exception instance that caused the current exception.
+ To Return the original exception pass it as a parameter to the constructor , of current exception.
+ Always check if inner exception is not null before accessing any property of the inner
+ exception object, else , you mayu get null reference exception. 
+ To get the type of inner exception use getType() method*/
+namespace InnerException
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                try
+                {
+                    System.Console.WriteLine("Enter First Number");
+                    int FN = Convert.ToInt32(System.Console.ReadLine());
+                    System.Console.WriteLine("Enter Second Number");
+                    int SN = Convert.ToInt32(System.Console.ReadLine());
+                    int Result = FN / SN;
+                    System.Console.WriteLine("Result = {0}", Result);
+
+                }
+                catch (Exception ex)
+                {
+                    string filePath = @"C:\Users\Kushal\Documents\Visual Studio 2013\Projects\log9.txt";
+                    if (File.Exists(filePath))
+                    {
+                        StreamWriter streamWriter = new StreamWriter(filePath);
+                        streamWriter.Write(ex.GetType().Name);
+                        streamWriter.Close();
+                        System.Console.WriteLine("There is a problem");
+
+                    }
+                    else
+                    {
+                        /*if we want to intentionally throw an expceion we use throw keyword*/
+                        /*we are also throwing the original exeption ex with the new expcetion which is thrown in case file is not found*/
+                        throw new FileNotFoundException(filePath + "is not present {0}", ex);
+
+                    }
+
+                }
+            }
+            catch(Exception exception)
+            {
+                System.Console.WriteLine("Current Exception " + exception.GetType().Name);
+                if (exception.InnerException != null)
+                /*Always check if inner exception is not null before accessing any property of the inner
+                    exception object, else , you mayu get null reference exception. */
+                {
+                    System.Console.WriteLine("Inner Exception " + exception.InnerException.GetType().Name);
+                }
+            }
+            finally
+            {
+                System.Console.ReadLine();
+            }
+            
+           
+            
+        }
+    }
+}
+
+
+Creating Custom Exception:
+--------------------------
+Only when existing exception are not sufficient to express your problem.
+Exception is nothing but a class. All existing exception inherit from System.exception class.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization;
+
+namespace CustomExceptions
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+          
+            try
+            {
+            throw new UserAlreadyLoggedInException("User is already logged in....Kushal");
+            }
+            catch (UserAlreadyLoggedInException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+                Console.ReadLine();
+            
+        }
+    }
+}
+
+/*create a class that derives from the System.Exception class*/
+public class UserAlreadyLoggedInException : Exception
+{
+    public  UserAlreadyLoggedInException() : base(){}
+    public  UserAlreadyLoggedInException(string message) : base(message){}
+    /*Can use the inner Exception to support the inner exceptions*/
+    public UserAlreadyLoggedInException(string msg, Exception innerException) : base(msg, innerException) { }
+    public UserAlreadyLoggedInException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    /*If you want your exception class to run across application domains,  then the object must be serializable.*/
+}
+    
+
+
+-----------------------------------------------------
+
+Exception Handling Abuse:
+-------------------------
+
+Using exception  handling to implement program logical flow is bad and is termed is as exception handling abuse.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ExceptionHandlingAbuse
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+
+            Console.WriteLine("Please enter the numerator: ");
+            int Numerator = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Please enter the denominator: ");
+            int Denominator = Convert.ToInt32(Console.ReadLine());
+
+            int Result = Numerator / Denominator;
+            Console.WriteLine("Result is {0}", Result);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Please enter a number: ");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Number too big... {0} and {1} is allowed: ", Int32.MinValue, Int32.MaxValue);
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("Cannot divide by zero");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+
+        }
+    }
+}
+
+here are abusing the exception, below is how we need to address these exception.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ExceptionHandlingAbuse
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+            Console.WriteLine("Please enter the numerator: ");
+            int Numerator;
+            bool IsNumeratorConversionSuccessful =  Int32.TryParse(Console.ReadLine(), out Numerator);
+
+             if (IsNumeratorConversionSuccessful)
+             {
+                Console.WriteLine("Please enter the denominator: ");
+                int Denominator;
+                bool IsDenominatorConversionSuccessful =  Int32.TryParse(Console.ReadLine(), out Denominator);
+
+                if (IsDenominatorConversionSuccessful && Denominator != 0)
+                {
+                    int Result = Numerator / Denominator;
+                    Console.WriteLine("Result is {0}", Result);
+                }
+                else
+                 {
+                 if(Denominator ==0){
+                     Console.WriteLine("Denominator cannot be zero");
+                 }else{
+                     Console.WriteLine("Denominator should be between {0} and {1} ", Int32.MinValue, Int32.MaxValue);
+                 }
+                }
+             } else{
+                 Console.WriteLine("Numerator should be between {0} and {1} ", Int32.MinValue, Int32.MaxValue);
+             }}
+                 catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+
+        }
+    }
+}
+
+
+
+---------------------------------------------------------
+
+Why Enumns:
+-----------
+
+Enums are strongly typed constants. If a program uses set of integral numbers, consider replacing them with enums. Otherwise the programs will be
+less readable and maintainable.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Enums
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer[] customers = new Customer[3];
+            customers[0] = new Customer{
+                Name= "Mark",
+                Gender = 1
+            };
+            customers[1] = new Customer
+            {
+                Name = "Allen",
+                Gender = 2
+            };
+            customers[2] = new Customer
+            {
+                Name = "Barney",
+                Gender = 0
+            };
+            foreach (Customer customer in customers)
+            {
+                Console.WriteLine("Name = {0} && Gender {1} ", customer.Name, GetGender(customer.Gender));
+            }
+            Console.ReadLine();
+        }
+ 
+            public static string GetGender(int gender){
+                switch (gender){
+                    case 0:
+                         return "unknown";
+                     case 1:
+                         return "male";
+                     case 2:
+                         return "female";
+                    default:
+                        return "Invalid";
+                }
+            }
+  }
+
+    public class Customer
+    {
+        //0= unknown
+        //1=  known
+        //2= female
+        public string Name { get; set; }
+        public int Gender { get; set; }
+    }
+}
+
+-----
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Enums
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer[] customers = new Customer[3];
+            customers[0] = new Customer{
+                Name= "Mark",
+                Gender = Gender.Male
+            };
+            customers[1] = new Customer
+            {
+                Name = "Allen",
+                Gender = Gender.Female
+            };
+            customers[2] = new Customer
+            {
+                Name = "Barney",
+                Gender = Gender.Female
+            };
+            foreach (Customer customer in customers)
+            {
+                Console.WriteLine("Name = {0} and  Gender: {1} ", customer.Name, GetGender(customer.Gender));
+            }
+            Console.ReadLine();
+        }
+ 
+            public static string GetGender(Gender gender){
+                switch (gender){
+                    case Gender.Unknown:
+                         return "unknown";
+                     case Gender.Male:
+                         return "male";
+                     case Gender.Female:
+                         return "female";
+                    default:
+                        return "Invalid";
+                }
+            }
+  }
+
+    public enum Gender
+    {
+        Unknown,
+        Male,
+        Female
+    }
+
+    public class Customer
+    {
+        //0= unknown
+        //1=  known
+        //2= female
+        public string Name { get; set; }
+        public Gender Gender { get; set; }
+    }
+}
+-----
+
+
+This code is not so readable so we will use enums to make it more readable.
+
+Enums are enumerations.
+Explicit cast is required to convert from enums type to an integral type and vice versa.
+The default underlying type of enum in int.
+The default value of first element is zero, and get incremented by 1
+It is possible to customize the underlying type and value
+Enums are value type
+enums is used to create enumerations while, Enums class contains GetValues() or GetNames() methods which can be used to list Enums underlying type and Name.
+
+
+namespace EnumsUse
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] values = (int [])Enum.GetValues(typeof(Gender));
+            foreach (int value in values)
+            {
+                Console.WriteLine(value);
+            }
+            string[] names = (string[])Enum.GetNames(typeof(Gender));
+            foreach (string name in names)
+            {
+                Console.WriteLine(name);
+            }
+            Console.ReadLine();
+        }
+    }
+}
+
+public enum Gender  OR public enum Gender : short // by default it is int
+{
+    Unknown, Male, Female
+}
+
+If I do like unknwon=1 then it will automatically make the Male = 2 and female =3 OR  you can define yourself to all the enum variables
+
+Conversion:
+
+            Gender gender = (Gender)3;
+            int Num = (int)Gender.Unknown;
+
+            So enum is strongly typed.
+
+------
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Gender gender = (Gender)3;
+            int Num = (int)Gender.Unknown;
+
+            Gender gender1 = (Gender)Season.Winter;  // Casting between different enums
+            Console.ReadLine();
+        }
+    }
+}
+
+public enum Gender
+{
+    Unknown =1, Male=2, Female=3
+}
+
+public enum Season
+{
+    Winter =1, Spring=2, Summer=3
+}
+
+
+--------------------------------------------------
+
+
+Type and Type Members:
+----------------------
+
+Say, Customer is Type and filed, properties and methods and type members.
+In general classes, structs, enums, interaface, delegate are called types and fields, properties, constructor,  methods that normally reside in 
+type are called as type members.
+
+
+There are 5 access modifiers:
+    1. Private
+    2. Protected
+    3. Internal
+    4. Protected Internal
+    5. Public
+
+Type members can have all the access modifiera where type can have only 2 (internal, public) of the 5 access modifiers.
+
+
+
+TO make the codes clear we have Region the visual studio. It will group the codes in between the region.
+
+
+#region kushal
+    somecode here
+#endregion
+
+
+
+---------------------------------------------------
+
+Access Modifiers:
+------------------
+
+Private members are available only within the containing type (not even derived) while public members have no restrictions.
+Protected members are available within the contaiing type and to the type that derive from the containing type
+
+
+    class Program
+    {
+        static void Main(string[] args){
+            Customer c1 = new Customer();
+            Console.WriteLine(c1.ID); // this is accessible but not _id.
+        }
+    }
+    public class Customer
+    {
+        private int _id;
+        public int ID { get; set; }
+    }
+
+
+
+
+
+    class Program : Customer
+    {
+        static void Main(string[] args){
+            Customer c1 = new Customer();
+            //c1.ID is not accessible, but we can access via the Program instance variable.
+            Program p1 = new Program();
+            p1.ID =104;
+        }
+    }
+    public class Customer
+    {
+        protected int ID;
+    }
+    public class CorporateCustomer : Customer
+    {
+        public void PrintId()
+        {
+            CorporateCustomer cc = new CorporateCustomer();
+            cc.ID = 101;
+            base.ID = 102; // can use base or this also   
+            this.ID = 103;
+        }
+    }
+
+-------------------------------
+
+/*Internal and Protected Internal
+A member with internal access modifier is avaible anywhere with in the containing assembly. It's a pile time error to access, an internal
+member from outside the containing assembly
+Protected Internal members can be accessed by any code in the assemly in which it is declared , or from within a dferived class in another
+assembly. It is a combination of protected an internal if you have understod protected an internal , this should be very easy to follow
+Access Modifier: Internal : Accesibilty : Anywhere within the containing assembly
+Access Modifer: Protected Internal : Accessibiity: Anywhere with in the containing assembly, and from within a derieved class in any other
+assembly*/
+
+When we compile a project asp will generate two types of files exe and dlls. Exe is for windows applications while dll is for web app or class files.
+
+See the Access Modifiers file.
+
+------------------------------------
+

@@ -1,0 +1,6 @@
+c:\users\kushal\documents\visual studio 2013\Projects\CustomExceptions\CustomExceptions\bin\Debug\CustomExceptions.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\CustomExceptions\CustomExceptions\bin\Debug\CustomExceptions.exe
+c:\users\kushal\documents\visual studio 2013\Projects\CustomExceptions\CustomExceptions\bin\Debug\CustomExceptions.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\CustomExceptions\CustomExceptions\obj\Debug\CustomExceptions.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\CustomExceptions\CustomExceptions\obj\Debug\CustomExceptions.exe
+c:\users\kushal\documents\visual studio 2013\Projects\CustomExceptions\CustomExceptions\obj\Debug\CustomExceptions.pdb
