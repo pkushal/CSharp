@@ -1,0 +1,6 @@
+c:\users\kushal\documents\visual studio 2013\Projects\Bindings\Bindings\bin\Debug\Bindings.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\Bindings\Bindings\bin\Debug\Bindings.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Bindings\Bindings\bin\Debug\Bindings.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\Bindings\Bindings\obj\Debug\Bindings.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\Bindings\Bindings\obj\Debug\Bindings.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Bindings\Bindings\obj\Debug\Bindings.pdb
