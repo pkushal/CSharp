@@ -1,0 +1,8 @@
+c:\users\kushal\documents\visual studio 2013\Projects\Calculator\Calculator\bin\Debug\Calculator.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\Calculator\Calculator\bin\Debug\Calculator.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Calculator\Calculator\bin\Debug\Calculator.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\Calculator\Calculator\bin\Debug\MathLibrary.dll
+c:\users\kushal\documents\visual studio 2013\Projects\Calculator\Calculator\bin\Debug\MathLibrary.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\Calculator\Calculator\obj\Debug\Calculator.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\Calculator\Calculator\obj\Debug\Calculator.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Calculator\Calculator\obj\Debug\Calculator.pdb

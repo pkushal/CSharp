@@ -1,0 +1,6 @@
+c:\users\kushal\documents\visual studio 2013\Projects\Equals\Equals\bin\Debug\Equals.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\Equals\Equals\bin\Debug\Equals.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Equals\Equals\bin\Debug\Equals.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\Equals\Equals\obj\Debug\Equals.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\Equals\Equals\obj\Debug\Equals.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Equals\Equals\obj\Debug\Equals.pdb

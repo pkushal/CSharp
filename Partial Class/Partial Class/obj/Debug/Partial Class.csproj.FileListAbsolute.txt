@@ -1,0 +1,6 @@
+c:\users\kushal\documents\visual studio 2013\Projects\Partial Class\Partial Class\bin\Debug\Partial Class.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\Partial Class\Partial Class\obj\Debug\Partial Class.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\Partial Class\Partial Class\bin\Debug\Partial Class.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Partial Class\Partial Class\bin\Debug\Partial Class.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\Partial Class\Partial Class\obj\Debug\Partial Class.exe
+c:\users\kushal\documents\visual studio 2013\Projects\Partial Class\Partial Class\obj\Debug\Partial Class.pdb

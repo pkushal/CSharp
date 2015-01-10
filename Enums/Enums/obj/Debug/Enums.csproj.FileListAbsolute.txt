@@ -3,3 +3,4 @@ c:\users\kushal\documents\visual studio 2013\Projects\Enums\Enums\bin\Debug\Enum
 c:\users\kushal\documents\visual studio 2013\Projects\Enums\Enums\bin\Debug\Enums.pdb
 c:\users\kushal\documents\visual studio 2013\Projects\Enums\Enums\obj\Debug\Enums.exe
 c:\users\kushal\documents\visual studio 2013\Projects\Enums\Enums\obj\Debug\Enums.pdb
+C:\Users\Kushal\documents\visual studio 2013\Projects\Enums\Enums\obj\Debug\Enums.csprojResolveAssemblyReference.cache

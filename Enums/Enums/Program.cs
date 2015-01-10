@@ -29,7 +29,7 @@ namespace Enums
             {
                 Console.WriteLine("Name = {0} and  Gender: {1} ", customer.Name, GetGender(customer.Gender));
             }
-            Console.ReadLine();
+            
         }
  
             public static string GetGender(Gender gender){

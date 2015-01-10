@@ -1,0 +1,7 @@
+c:\Users\Kushal\Documents\Visual Studio 2013\Projects\MathLibrary\Calculator\bin\Debug\Calculator.exe.config
+c:\Users\Kushal\Documents\Visual Studio 2013\Projects\MathLibrary\Calculator\bin\Debug\Calculator.exe
+c:\Users\Kushal\Documents\Visual Studio 2013\Projects\MathLibrary\Calculator\bin\Debug\Calculator.pdb
+c:\Users\Kushal\Documents\Visual Studio 2013\Projects\MathLibrary\Calculator\bin\Debug\MathLibrary.dll
+c:\Users\Kushal\Documents\Visual Studio 2013\Projects\MathLibrary\Calculator\bin\Debug\MathLibrary.pdb
+c:\Users\Kushal\Documents\Visual Studio 2013\Projects\MathLibrary\Calculator\obj\Debug\Calculator.exe
+c:\Users\Kushal\Documents\Visual Studio 2013\Projects\MathLibrary\Calculator\obj\Debug\Calculator.pdb

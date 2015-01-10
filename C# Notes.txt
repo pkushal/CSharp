@@ -2661,3 +2661,313 @@ namespace Bindings
         }
     }
 }
+
+
+
+
+-------------------------------------------------------
+Generics:
+---------
+Introduced in C# 2.0.
+Allows us the design classes and methods decoupled from the data types....and code can be used with any data type
+Extensively used by the collection classes available in System.Collections.Generic namespace
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Generics
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool Equal = Calculator.AreEqual(1, 2);
+            if (Equal)
+            {
+                Console.WriteLine("Equal");
+            }
+            else
+            {
+                Console.WriteLine("Not Equal");
+            }
+        }
+    }
+    public class Calculator
+    {
+        public static bool AreEqual(int Value1, int Value2)
+        {
+            return Value1 == Value2;
+        }
+    }
+}
+
+
+This code is very limited to int data type
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Generics
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool Equal = Calculator.AreEqual("A", "A");
+            if (Equal)
+            {
+                Console.WriteLine("Equal");
+            }
+            else
+            {
+                Console.WriteLine("Not Equal");
+            }
+        }
+    }
+    public class Calculator
+    {
+        public static bool AreEqual(object Value1, object Value2)  % we replaced the int to object
+        {
+            return Value1 == Value2;
+        }
+    }
+}
+
+Now this method is resueable to any data type. The problem with this method is that the it requires boxing (converting value type to reference type); this unnecessay thing will degrade the performance. It will also compare 10 and "A", which doesnot makes sense. So we use generics to address these issues.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Generics
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool Equal = Calculator.AreEqual<string>("A", "A");
+            if (Equal)
+            {
+                Console.WriteLine("Equal");
+            }
+            else
+            {
+                Console.WriteLine("Not Equal");
+            }
+        }
+    }
+    public class Calculator
+    {
+        public static bool AreEqual <T> (T Value1, T Value2)
+        {
+            return Value1.Equals(Value2);
+        }
+    }
+}
+
+here we have made the method generic, below we have made the class generic
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Generics
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool Equal = Calculator<string>.AreEqual("A", "A");
+            if (Equal)
+            {
+                Console.WriteLine("Equal");
+            }
+            else
+            {
+                Console.WriteLine("Not Equal");
+            }
+        }
+    }
+    public class Calculator<T>
+    {
+        public static bool AreEqual(T Value1, T Value2)
+        {
+            return Value1.Equals(Value2);
+        }
+    }
+}
+
+It doesn't have to be T, we can give it any name we want.
+
+
+-------------------------------------------------------------------------
+
+Why to override, ToString() methods?
+
+ToString will give the string representation.
+We can override equals, gethash and tostring methods in .net framework
+
+namespace ToString
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer C1 = new Customer();
+            C1.FirstName = "Kushal";
+            C1.LastName = "Pradhan";
+            Console.WriteLine(C1.ToString());
+        }
+    }
+    public class Customer
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public override string ToString()
+        {
+            return FirstName +" "+ LastName;
+        }
+    }
+}
+
+
+----------------------------------------------------------------------------
+
+Equals:
+-------
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer C1 = new Customer();
+            C1.FirstName = "Kushal";
+            C1.LastName = "Pradhan";
+            Customer C2 = C1;   // here C1 and C2 are two references pointing to the same object
+            Console.WriteLine(C1==C2); // this will be give true
+            Console.WriteLine(C1.Equals(C2)); // this will also give true because it is comparing the references pointing to the same object
+
+        }
+    }
+    public class Customer
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+
+If we had, Customer C2 = new Customer(); 
+                    C2.FirstName = "Kushal";
+                    C2.LastName = "Pradhan"; 
+                                             then the result will be false and false.
+There is value equality but not reference equality.
+== will give the reference equality
+Equals will by default do the same thing as ==, but we can override to check the value equality
+
+
+namespace Equals
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer C1 = new Customer();
+            C1.FirstName = "Kushal";
+            C1.LastName = "Pradhan";
+            Customer C2 = new Customer();
+            C2.FirstName = "Kushal";
+            C2.LastName = "Pradhan";
+            Console.WriteLine(C1==C2);
+            Console.WriteLine(C1.Equals(C2));
+
+        }
+    }
+    public class Customer
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        // this will do the value equality thing
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if(!(obj is Customer))
+            {
+                return false;
+            }
+            return this.FirstName == ((Customer)obj).FirstName && this.LastName == ((Customer)obj).LastName;
+        }
+    }
+}
+
+
+It is a good practise to override the getHash method as well whenever we override the equals method. So we add the following
+
+  public override int GetHashCode()
+        {
+            return this.FirstName.GetHashCode() ^ this.LastName.GetHashCode();
+        }
+
+
+
+-----------------------------------------------------------
+
+Difference between Convert.ToString() and ToString():
+------------------------------------------------------
+
+Convert.ToString() will also convert the null object to the empty string while the normal ToString() cannot do this.
+This is the difference; the Convert.ToString can handle the null object and return the empty string while the other throws the null reference exception.
+
+
+-----------------------------------------------------------
+
+
+System.String and String.Text.StringBuilder:
+--------------------------------------------
+
+System.String is immutable while the String.Text.StringBuilder is mutable.
+To use the string builder, we need to use the namespace called System.Text and we cannot just add the strings, we need to use the append methods and use toString to print the string.
+
+using System.Text;
+
+namespace StringTypes
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // it is wise to use the stringBuilder when there is a heavy string manipulation
+            StringBuilder userString = new StringBuilder("C#");
+            userString.Append(" is good");
+            userString.Append("with stringBuilder");
+            Console.WriteLine(userString.ToString());
+        }
+    }
+}
+
+
+-----------------------------------------------------------
+
+Partial Class:
+--------------
+
+Allows us to split a class into 2 or more files. All these parts are then combined into a single class, when the application is compiled. The partial keyword can also be used to split a struct or an interface over two or more files.
+
+Visual studio uses partial classes to separate automatically generated system code  from the developer code. For instance, when you add a webform two .CS files are generated.
+    webform1.aspx.cs contains the developer's code
+    webform1.aspx.designer.cx contains the system generated code.
+
+While working on large project, spreading the class over separate file allows multiple programmer to work simultaneously.

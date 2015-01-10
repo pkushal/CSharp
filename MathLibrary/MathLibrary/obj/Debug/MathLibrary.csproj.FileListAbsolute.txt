@@ -1,0 +1,4 @@
+c:\users\kushal\documents\visual studio 2013\Projects\MathLibrary\MathLibrary\bin\Debug\MathLibrary.dll
+c:\users\kushal\documents\visual studio 2013\Projects\MathLibrary\MathLibrary\bin\Debug\MathLibrary.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\MathLibrary\MathLibrary\obj\Debug\MathLibrary.dll
+c:\users\kushal\documents\visual studio 2013\Projects\MathLibrary\MathLibrary\obj\Debug\MathLibrary.pdb
