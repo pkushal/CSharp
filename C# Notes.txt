@@ -2971,3 +2971,57 @@ Visual studio uses partial classes to separate automatically generated system co
     webform1.aspx.designer.cx contains the system generated code.
 
 While working on large project, spreading the class over separate file allows multiple programmer to work simultaneously.
+
+
+--------------------------------------------------------------
+
+
+All the parts spread across different files, must use the partial keyword
+
+All the parts spread across the different files must have the same access modifiers
+
+If any of the parts inherit a class then the entire type inherits that class.
+
+If any of the parts of partial class is declared abstract or sealed then the entire type is treated as abstract or sealed.
+
+C# does not support mulitple inheritance. Different parts of the partial class must not specify different base classes.
+
+Different parts of the partial class can specify different base interface and the final type implements all of the interfaces listed by all of the partial declaration.
+
+Any member that are declared in a partial definition are available to all of the other parts of the partial class.
+
+
+-----------------------------------------------------------
+
+
+Partial Methods:
+----------------
+A partial class or a struct can have a partial methods
+It is created using a partial keyword
+The declaration consists of two parts:  
+        the definition
+        the implementation
+        They may be in the same or in the different parts of the partial class.
+
+The implementation of the partial method is optional
+Partial methods are private by default and it will give error even if you declare it as private
+It is a compile time error to include declaration and implementation at the same time for a partial method.
+Return type of the partial method must be void
+
+
+------------------------------------------
+
+Indexers used in .Net:
+----------------------
+
+Indexers will have the [] brackets and we can use them to store datas.
+They are like keys.
+We can use the integral or the string indexers.
+
+Indexers allows instance of a class to be indexed just like arrays.
+
+Creating Indexers:
+
+Use the "this" keyword to create an indexer
+Just like the properties indexers have get and set accessors
+Indexers can be overloaded.

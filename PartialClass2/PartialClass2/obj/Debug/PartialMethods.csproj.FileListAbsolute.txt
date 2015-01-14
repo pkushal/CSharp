@@ -1,0 +1,5 @@
+c:\users\kushal\documents\visual studio 2013\Projects\PartialClass2\PartialClass2\bin\Debug\PartialClass2.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\PartialClass2\PartialClass2\bin\Debug\PartialClass2.exe
+c:\users\kushal\documents\visual studio 2013\Projects\PartialClass2\PartialClass2\bin\Debug\PartialClass2.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\PartialClass2\PartialClass2\obj\Debug\PartialClass2.exe
+c:\users\kushal\documents\visual studio 2013\Projects\PartialClass2\PartialClass2\obj\Debug\PartialClass2.pdb
