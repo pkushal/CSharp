@@ -3025,3 +3025,196 @@ Creating Indexers:
 Use the "this" keyword to create an indexer
 Just like the properties indexers have get and set accessors
 Indexers can be overloaded.
+
+namespace Indexers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Company company = new Company();
+
+            Console.WriteLine("name of Employee with Id = 1 is : " +company[1]);
+            Console.WriteLine("name of Employee with Id = 2 is : " + company[2]);
+            company[2] = "Zaman";
+            Console.WriteLine("name of Employee with Id = 2 is : " + company[2]);
+        }
+
+    }
+}
+
+
+namespace Indexers
+{
+    public class Employee
+    {
+        public int EmployeeId { get; set; }
+        public string Name { get; set; }
+        public string Gender { get; set; }
+
+    }
+    public class Company
+    {
+        private List<Employee> listEmployee;
+        public Company()
+        {
+            listEmployee = new List<Employee>();
+            listEmployee.Add(new Employee() { EmployeeId = 1, Name = "Kushal", Gender = "Male" });
+            listEmployee.Add(new Employee() { EmployeeId = 2, Name = "Aman", Gender = "Male" });
+        }
+
+        // we are creating the indexer here
+        public string this[int employeeId]
+        {
+            get
+            {
+                return listEmployee.FirstOrDefault(emp => emp.EmployeeId == employeeId).Name;
+            }
+            set
+            {
+                listEmployee.FirstOrDefault(emp => emp.EmployeeId == employeeId).Name = value;
+            }
+        }
+    }
+}
+
+
+
+Overloading Indexers:
+---------------------
+Indexers can also be overloaded based on number and type of parameters.
+
+
+Optional Parameters:
+--------------------
+Different ways that are available to make method parameters optional.
+
+4 ways:
+1. use parameters arrays
+2. Method overloading
+3. specify parameters defaults
+4. use optionalattribute that is present in System.Runtime.InteropsService namespace
+
+Parameter array must be the last parameter in a formal parameter list.
+
+1.
+namespace OptionalParameters
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            AddNumbers(10, 20, 30, 40);
+        }
+        public static void AddNumbers(int firstNumber, int secondNumber, params object[] restOfTheNumbers)
+        {
+            int result = firstNumber + secondNumber;
+            if (restOfTheNumbers != null)
+            {
+
+                foreach (int i in restOfTheNumbers)
+                {
+                    result += i;
+                }
+            }
+            Console.WriteLine("Total : " + result);
+        }
+    }
+}
+
+
+2.
+
+namespace OptionalParameters
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            AddNumbers2(10, 20, new int[]{30, 40});
+        }
+  
+        // we are using the method overloaded version of the AddNumbers2
+        public static void AddNumbers2(int firstNumber, int secondNumber)
+        {
+            AddNumbers2(firstNumber, secondNumber, null);
+        }
+
+       public static void AddNumbers2(int firstNumber, int secondNumber, int[] restOfTheNumbers)
+        {
+            int result = firstNumber + secondNumber;
+            if (restOfTheNumbers != null)
+            {
+
+                foreach (int i in restOfTheNumbers)
+                {
+                    result += i;
+                }
+            }
+            Console.WriteLine("Sum : " + result);
+        }
+    }
+}
+
+
+3.
+
+namespace OptionalParameters
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            AddNumbers3(10, 20, new int[] { 50, 40 });
+        }
+
+        //Specifying the parameters defaults
+        public static void AddNumbers3(int firstNumber, int secondNumber, int[] restOfTheNumbers = null)
+        {
+            int result = firstNumber + secondNumber;
+            if (restOfTheNumbers != null)
+            {
+
+                foreach (int i in restOfTheNumbers)
+                {
+                    result += i;
+                }
+            }
+            Console.WriteLine("Grand Sum : " + result);
+        }
+
+    }
+}
+
+
+4.
+
+using System.Runtime.InteropServices; // we need to import this
+
+namespace OptionalParameters
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            AddNumbers4(10, 20, new int[] { 50, 60 });
+        }
+
+       // By using the optionalAttribute
+
+        public static void AddNumbers4(int firstNumber, int secondNumber, [Optional] int[] restOfTheNumbers)
+        {
+            int result = firstNumber + secondNumber;
+            if (restOfTheNumbers != null)
+            {
+
+                foreach (int i in restOfTheNumbers)
+                {
+                    result += i;
+                }
+            }
+            Console.WriteLine("Grand Total : " + result);
+        }
+
+    }
+}

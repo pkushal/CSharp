@@ -35,5 +35,22 @@ namespace Indexers
                 listEmployee.FirstOrDefault(emp => emp.EmployeeId == employeeId).Name = value;
             }
         }
+        public string this[string Gender]
+        {
+            get
+            {
+                return listEmployee.Count(emp => emp.Gender == Gender).ToString();
+            }
+            set
+            {
+                foreach (Employee employee in listEmployee)
+                {
+                    if (employee.Gender == Gender)
+                    {
+                        employee.Gender = value;
+                    }
+                }
+            }
+        }
     }
 }
