@@ -1,0 +1,6 @@
+c:\users\kushal\documents\visual studio 2013\Projects\DictionaryInCSharp\DictionaryInCSharp\bin\Debug\DictionaryInCSharp.exe.config
+c:\users\kushal\documents\visual studio 2013\Projects\DictionaryInCSharp\DictionaryInCSharp\bin\Debug\DictionaryInCSharp.exe
+c:\users\kushal\documents\visual studio 2013\Projects\DictionaryInCSharp\DictionaryInCSharp\bin\Debug\DictionaryInCSharp.pdb
+c:\users\kushal\documents\visual studio 2013\Projects\DictionaryInCSharp\DictionaryInCSharp\obj\Debug\DictionaryInCSharp.csprojResolveAssemblyReference.cache
+c:\users\kushal\documents\visual studio 2013\Projects\DictionaryInCSharp\DictionaryInCSharp\obj\Debug\DictionaryInCSharp.exe
+c:\users\kushal\documents\visual studio 2013\Projects\DictionaryInCSharp\DictionaryInCSharp\obj\Debug\DictionaryInCSharp.pdb
