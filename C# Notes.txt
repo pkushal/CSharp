@@ -3375,3 +3375,213 @@ namespace DictionaryInCSharp
         public int Salary { get; set; }
     }
 }
+
+
+--------------------------------------------------------------------
+
+List Collection:
+-------------------
+
+
+List one of the generic collection classes present in the System.Collection.Generic namespace. There are like Dictionary, List,
+Stack, Queues etc.
+List can be used to make a collection of any type.
+Objects stored in list can be accessed by index.
+Unlike arrays, list can grow in size automatically. It also provides methods to sort, search and manipulate list.
+
+
+using System.Collections.Generic;
+
+namespace ListCollection
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer C1 = new Customer()
+            {
+                Id = 101,
+                Name = "Kushal1",
+                Salary = 75000
+            };
+
+            Customer C2 = new Customer()
+            {
+                Id = 102,
+                Name = "Kushal2",
+                Salary = 85000
+            };
+
+            Customer C3 = new Customer()
+            {
+                Id = 103,
+                Name = "Kushal3",
+                Salary = 80000
+            };
+
+            //array of Customer object; we have to predefine the size the array unlike in the List
+            Customer[] customer = new Customer[2];
+            customer[0] = C1;
+            customer[1] = C2;
+
+            //List can grow in size automatically
+            List<Customer> customerList = new List<Customer>(2); // 2 is the initial size of the list
+            customerList.Add(C1);
+            customerList.Add(C2);
+            customerList.Add(C3);// even though the initial size is 2, it can grow Automatically
+            // we can access the List using the index numbers
+            Console.WriteLine("Customer Name: {0}, ID: {1}, Salary: {2}",customerList[0].Name, customerList[0].Id, customerList[0].Salary);
+            //Counting the number of objects in the List
+            Console.WriteLine("To find the numbers of object in the list we can use CustomerList.count : " +customerList.Count);
+            // List is strongly typed and we cannot add the object of different type in this type of List collection.
+
+            customerList.Insert(1, C2);// This will insert the C2 Customer in the index 1 and the rest of the objects will be pushed back.
+            //Add will only add the new customers at the last index.
+            
+            customerList.IndexOf(C2);// This will give the index of the Customer C2, if more than one C2 are present, it will give the first object
+            Console.WriteLine(customerList.IndexOf(C2));
+            customerList.IndexOf(C2, 1);// This will look for C2 from index 1, 1 is inclusive
+            customerList.IndexOf(C2, 1, 2); // It will look for 2 C2 objects starting from index 1
+        }
+    }
+    public class Customer
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Salary { get; set; }
+    }
+}
+
+
+-----------------------------------------------------------
+
+Working with Generic List class and ranges in C#:
+---------------------------------------------------
+
+Contains(): Checks if an item exists in the list. It returns boolean.
+Exists() : Checks if an item exists in the list based on a condition. It also returns boolean
+Find(): Searches for an element that matches the condition defined by the specified lambda expression and returns the first matching item from the list.
+
+FindLast(): Obvious
+FindAll(): Obvious
+FindIndex(): Returns the index that matches the condition
+FindLastIndex(): Returns the last index that matches the condition.
+
+ToList() will convert an array to List
+ToArray() will convert the list to array
+ToDictionary() will convert to dictionary
+
+
+using System;
+using System.Collections.Generic;
+
+namespace GenericList_and_Range
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer C1 = new Customer()
+            {
+                Id = 101,
+                Name = "Kushal1",
+                Salary = 75000
+            };
+
+            Customer C2 = new Customer()
+            {
+                Id = 102,
+                Name = "Kushal2",
+                Salary = 85000
+            };
+
+            Customer C3 = new Customer()
+            {
+                Id = 103,
+                Name = "Kushal3",
+                Salary = 80000
+            };
+
+            //List can grow in size automatically
+            List<Customer> customerList = new List<Customer>(2); 
+            customerList.Add(C1);
+            customerList.Add(C2);
+            customerList.Add(C3);
+
+            if (customerList.Contains(C3))
+            {
+                Console.WriteLine("Customer 3 is present in the list");
+            }else{
+                Console.WriteLine("Customer 3 is not present in the list");
+            }
+
+            //using the lambda expression in the exist method
+            if (customerList.Exists(cust => cust.Name.StartsWith("K")))
+            {
+                Console.WriteLine("Wala this is a use of lambda expression");
+            }
+            else
+            {
+                Console.WriteLine("Waalla");
+            }
+
+            // Using the find method; it just returns one object
+            Customer C = customerList.Find(cust => cust.Salary > 76000);
+            Console.WriteLine("Customer Name: {0}, ID: {1}, Salary: {2}", C.Name, C.Id, C.Salary);//gives the first matching item
+            
+
+            //Using the findLast() method
+            Customer Clast = customerList.Find(cust => cust.Salary > 1000);
+            Console.WriteLine("Customer Name: {0}, ID: {1}, Salary: {2}", Clast.Name, Clast.Id, Clast.Salary); //gives the last matching item
+
+
+            //Using the findAll() method
+            Console.WriteLine("----------------------------------------------------");
+            List<Customer> CAll = customerList.FindAll(cust => cust.Salary > 1000);
+            foreach (var item in CAll)
+            {
+                Console.WriteLine("Customer Name: {0}, ID: {1}, Salary: {2}", item.Name, item.Id, item.Salary);
+            }
+
+            //Using FindIndex() method
+            Console.WriteLine("----------------------------------------------------");
+            int index = customerList.FindIndex(cust => cust.Salary > 75000);
+            Console.WriteLine("Index of the customer who earns more than 75000: " + index);
+
+            int indexoverloaded = customerList.FindIndex(2, cust => cust.Salary > 4000);
+            Console.WriteLine("Index of the customer who earns more than 75000: " + indexoverloaded);
+
+            //Using the FindLastIndex() method
+            Console.WriteLine("----------------------------------------------------");
+            int lastIndex = customerList.FindLastIndex(cust => cust.Salary > 4000);
+            Console.WriteLine("Last index : "+ lastIndex);
+
+
+            // Array to List:
+            Customer[] customer = new Customer[2];
+            customer[0] = C1;
+            customer[1] = C2;
+            List<Customer> listCustomer = customer.ToList(); // we have converted array to list
+
+            //List to an array:
+
+            Customer[] array = customerList.ToArray();
+
+            //ToDictionary() method
+            Console.WriteLine("-----------Dictionary----------------");
+            Dictionary<int, Customer> dictionary = customerList.ToDictionary(x => x.Id);
+            foreach (var Cus in dictionary)
+            {
+                Customer item = Cus.Value;
+                 Console.WriteLine("Customer Name: {0}, ID: {1}, Salary: {2}", item.Name, item.Id, item.Salary);
+            }
+
+        }
+        public class Customer
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public int Salary { get; set; }
+        }
+    }
+}
